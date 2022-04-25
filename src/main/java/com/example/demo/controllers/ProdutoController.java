@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Optional;
 
+
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/produtos")
 public class ProdutoController {
@@ -17,7 +19,7 @@ public class ProdutoController {
     @Autowired
     private ProdutoRepository produtoRepository;//Injeção de dependência
 
-    @PostMapping
+   @PostMapping("/banana")
     public @ResponseBody Produto novoProduto(@Valid @RequestParam String nome,
                                              @RequestParam double preco,
                                              @RequestParam double desconto,
@@ -29,10 +31,11 @@ public class ProdutoController {
 
     // ou simplesmente -->
 
-    // public @ResponseBody Produto novoProduto(@Valid Produto produto){
-    //        produtoRepository.save(produto);
-    //        return produto;
-    //    }
+    @PostMapping
+    public Produto novoProduto(@RequestBody @Valid Produto produto){
+        produtoRepository.save(produto);
+        return produto;
+    }
 
     @GetMapping
     public Iterable<Produto> obterProduto(){
@@ -52,7 +55,7 @@ public class ProdutoController {
 
     @GetMapping(path = "/nome/{parteNome}")
     public Iterable<Produto> obterProdutoPorNome(@PathVariable("parteNome") String parteNome){
-        return produtoRepository.findByNomeContainingIgnoreCase(parteNome);
+        return produtoRepository.searchByNameLike(parteNome);
     }
 
     @PutMapping
