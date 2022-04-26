@@ -3,6 +3,7 @@ package com.example.demo.model.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Pedido {
@@ -16,6 +17,9 @@ public class Pedido {
     @ManyToOne
     @NotNull
     private Cliente cliente;
+
+    @OneToMany(mappedBy = "pedido")
+    private List<ItemPedido> itemPedidos;
 
     public Pedido(){
         this(new Date());

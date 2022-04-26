@@ -1,13 +1,10 @@
 package com.example.demo.model.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
+import java.util.List;
 
 @Entity
 public class Produto {
@@ -27,6 +24,9 @@ public class Produto {
     private double desconto;
 
     private String descricao;
+
+    @OneToMany(mappedBy = "produto")
+    private List<ItemPedido> itemPedidos;
 
     public Produto() {
     }
