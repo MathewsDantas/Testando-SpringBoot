@@ -1,4 +1,4 @@
-package com.example.demo.model.repositories;
+package com.example.demo.repositories;
 
 import com.example.demo.model.entities.Produto;
 import org.springframework.data.jpa.repository.Query;
